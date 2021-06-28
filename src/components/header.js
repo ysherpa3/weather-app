@@ -1,42 +1,37 @@
-import * as React from "react"
-import PropTypes from "prop-types"
-import { Link } from "gatsby"
+// Header component
 
-const Header = ({ siteTitle }) => (
-  <header
-    style={{
-      background: `rebeccapurple`,
-      marginBottom: `1.45rem`,
-    }}
-  >
-    <div
-      style={{
-        margin: `0 auto`,
-        maxWidth: 960,
-        padding: `1.45rem 1.0875rem`,
-      }}
-    >
-      <h1 style={{ margin: 0 }}>
-        <Link
-          to="/"
-          style={{
-            color: `white`,
-            textDecoration: `none`,
-          }}
-        >
-          {siteTitle}
-        </Link>
-      </h1>
-    </div>
-  </header>
-)
+import { AppBar, Toolbar, Typography } from "@material-ui/core"
+import WbSunnyIcon from "@material-ui/icons/WbSunny"
+import PropTypes from "prop-types"
+import * as React from "react"
+
+const Header = ({ siteTitle, theme }) => {
+  return (
+    <header style={{ flexShrink: 0 }}>
+      <AppBar
+        position="static"
+        color={theme.palette.mode === "dark" ? "secondary" : "primary"}
+        enableColorOnDark
+      >
+        <Toolbar variant="dense">
+          <WbSunnyIcon fontSize="large" sx={{ mr: 2 }} />
+          <Typography variant="h6" color="inherit" component="div">
+            {siteTitle}
+          </Typography>
+        </Toolbar>
+      </AppBar>
+    </header>
+  )
+}
 
 Header.propTypes = {
   siteTitle: PropTypes.string,
+  theme: PropTypes.object,
 }
 
 Header.defaultProps = {
   siteTitle: ``,
+  theme: {},
 }
 
 export default Header

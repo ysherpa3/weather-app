@@ -1,18 +1,18 @@
-/**
- * Layout component that queries for data
- * with Gatsby's useStaticQuery component
- *
- * See: https://www.gatsbyjs.com/docs/use-static-query/
- */
+// Layout component
 
-import * as React from "react"
+import { Box, CssBaseline, Divider } from "@material-ui/core"
+import { ThemeProvider } from "@material-ui/core/styles"
+import { graphql, useStaticQuery } from "gatsby"
 import PropTypes from "prop-types"
-import { useStaticQuery, graphql } from "gatsby"
+import * as React from "react"
 
+import ToggleColorMode from "./color-mode/ToggleColorMode"
+import Footer from "./footer"
 import Header from "./header"
-import "./layout.css"
+import Seo from "./seo"
+import ToggleUnits from "./toggle-units"
 
-const Layout = ({ children }) => {
+const Layout = ({ children, theme, checked, onChange }) => {
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
@@ -24,27 +24,50 @@ const Layout = ({ children }) => {
   `)
 
   return (
-    <>
-      <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Seo />
       <div
         style={{
-          margin: `0 auto`,
-          maxWidth: 960,
-          padding: `0 1.0875rem 1.45rem`,
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          minHeight: "100vh",
         }}
       >
-        <main>{children}</main>
-        <footer
+        <div>
+          <Header
+            siteTitle={data.site.siteMetadata?.title || `Title`}
+            theme={theme}
+          />
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "flex-end",
+              alignItems: "center",
+              "& hr": {
+                m: "8px 16px 8px 4px",
+              },
+            }}
+          >
+            <ToggleColorMode theme={theme} />
+            <Divider orientation="vertical" variant="middle" flexItem />
+            <ToggleUnits checked={checked} onChange={onChange} theme={theme} />
+          </Box>
+        </div>
+        <main
           style={{
-            marginTop: `2rem`,
+            display: "flex",
+            flexDirection: "column",
+            flexGrow: 1,
+            padding: theme.spacing(1, 0),
           }}
         >
-          © {new Date().getFullYear()}, Built with
-          {` `}
-          <a href="https://www.gatsbyjs.com">Gatsby</a>
-        </footer>
+          {children}
+        </main>
+        <Footer year={new Date().getFullYear() || `2021`} />
       </div>
-    </>
+    </ThemeProvider>
   )
 }
 
