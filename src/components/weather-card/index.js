@@ -18,7 +18,7 @@ import * as React from "react"
 import DailyWeather from "./DailyWeather"
 import DetailTiles from "./DetailTiles"
 import { getRainChanceIcon } from "./getRainChanceIcon"
-import { getUVIndex } from "./getUvIndex"
+import { getUVIndex } from "./getUVIndex"
 import HourlyWeather from "./HourlyWeather"
 
 dayjs.extend(utc)
