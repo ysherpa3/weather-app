@@ -22,7 +22,7 @@ import parse from "autosuggest-highlight/parse"
 import * as React from "react"
 import ReactCountryFlag from "react-country-flag"
 
-import cityData from "../../../data/city.list.json"
+import cityData from "../../../content/city.list.json"
 import { getStateName } from "./getStateName"
 import ListboxComponent from "./Listbox"
 
@@ -86,7 +86,7 @@ const CitySearch = ({ value, onChange, theme }) => {
   }, [isOpen, inputValue])
 
   const filterOptions = createFilterOptions({
-    limit: 1000,
+    limit: 100,
   })
 
   return (

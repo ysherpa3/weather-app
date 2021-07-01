@@ -1,6 +1,6 @@
 // Returns full state name given a states' 2-letter abbreviation
 
-import statesList from "../../../data/us-states.json"
+import statesList from "../../../content/us-states.json"
 
 export const getStateName = abbr => {
   const stateName = statesList
